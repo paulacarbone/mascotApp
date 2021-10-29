@@ -32,8 +32,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block ppp">Crear Usuario</button>
-                </div>
-                
+                </div>               
                 
             </form>
 
@@ -54,9 +53,11 @@
                 
                 {% for contact in contacts %}
                 <tr>
-                    <td>{{contact.1}}</td> <!---FullName pq está en el indice 1-->
-                    <td>{{contact.2}}</td> <!-- Telefono-->
-                    <td>{{contact.3}}</td> <!-- Mail-->
+                    <td>{{contact.1}}</td> <!---nombre pq está en el indice 1-->
+                    <td>{{contact.2}}</td> <!-- apellido-->
+                    <td>{{contact.3}}</td> <!-- localidad-->
+                    <td>{{contact.4}}</td> <!-- user-->
+                    <!-- <td>{{contact.5}}</td> password -->
                     <td id="options">
                         <a href="/edit/{{contact.0}}" class="btn btn-info">Edit</a> <!-- EDIT - contact.0 es el id en la bbdd asi el servidor sabe que id editar--> 
                         <a href="/delete/{{contact.0}}" class="btn btn-secondary btn-delete">Delete</a>

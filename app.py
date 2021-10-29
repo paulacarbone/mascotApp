@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'flaskcontacts'
+app.config['MYSQL_DB'] = 'mascotapp'
 mysql = MySQL(app)
 
 # settings
@@ -26,11 +26,13 @@ def Index():
 @app.route('/add_contact', methods=['POST'])
 def add_contact():
     if request.method == 'POST':
-        fullname = request.form['fullname']
-        phone = request.form['phone']
-        email = request.form['email']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        localidad = request.form['localidad']
+        usuario = request.form['usuario']
+        password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO contacts (fullname, phone, email) VALUES (%s,%s,%s)", (fullname, phone, email))
+        cur.execute("INSERT INTO contacts (nombre, apellido, localidad, usuario, password) VALUES (%s,%s,%s,%s,%s)", (nombre, apellido, localidad,usuario,password))
         mysql.connection.commit()
         flash('Contact Added successfully')
         return redirect(url_for('Index'))
@@ -47,17 +49,21 @@ def get_contact(id):
 @app.route('/update/<id>', methods=['POST'])
 def update_contact(id):
     if request.method == 'POST':
-        fullname = request.form['fullname']
-        phone = request.form['phone']
-        email = request.form['email']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        localidad = request.form['localidad']
+        usuario = request.form['usuario']
+        password = request.form['password']
         cur = mysql.connection.cursor()
         cur.execute("""
             UPDATE contacts
-            SET fullname = %s,
-                email = %s,
-                phone = %s
+            SET nombre = %s,
+                apellido = %s,
+                localidad = %s
+                usuario = %s
+                password = %s
             WHERE id = %s
-        """, (fullname, email, phone, id))
+        """, (nombre, apellido, localidad, usuario, password, id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
         return redirect(url_for('Index'))
@@ -72,4 +78,4 @@ def delete_contact(id):
 
 # starting the app
 if __name__ == "__main__":
-    app.run(port=3306, debug=True)
+    app.run(port=3000, debug=True)
