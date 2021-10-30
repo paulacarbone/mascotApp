@@ -32,7 +32,7 @@ def add_contact():
         usuario = request.form['usuario']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO contacts (nombre, apellido, localidad, usuario, password) VALUES (%s,%s,%s,%s,%s)", (nombre, apellido, localidad,usuario,password))
+        cur.execute("INSERT INTO mascotapp.contacts (nombre, apellido, localidad, usuario, password) VALUES (%s,%s,%s,%s,%s)", (nombre, apellido, localidad,usuario,password))
         mysql.connection.commit()
         flash('Contact Added successfully')
         return redirect(url_for('Index'))
